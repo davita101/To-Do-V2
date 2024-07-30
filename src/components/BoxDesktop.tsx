@@ -1,5 +1,6 @@
 import * as React from "react"
 import ButtonTitle from "./ButtonTitle"
+import { EditCard } from "./EditCard"
 
 interface Props {
     name?: string,
@@ -14,7 +15,7 @@ interface Props {
 
 const BoxDesktop: React.FC<Props> = ({ name, img, title, status, timeObj, search }) => {
     return (
-        <div className="md:flex hidden justify-between ">
+        <div className="md:flex hidden justify-between items-center ">
             <div className="w-[.5rem]  h-full shadow-md bg-[#6aa09d] rounded-l-lg absolute left-[-1px] top-0" />
             <div className="flex items-start">
                 <img src={img} alt="company logo" />
@@ -37,6 +38,7 @@ const BoxDesktop: React.FC<Props> = ({ name, img, title, status, timeObj, search
                     </div>
                 </div>
             </div>
+            <EditCard />
         </div>
     )
 }

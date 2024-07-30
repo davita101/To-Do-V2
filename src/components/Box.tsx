@@ -7,8 +7,6 @@ interface Props {
     children: React.ReactNode
 }
 
-
-
 const Box: React.FC<Props> = ({ children }) => {
     return (
         <div className="shadow-lg relative bg-white shadow-[#c3e4e5] p-5 rounded-sm">

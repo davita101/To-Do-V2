@@ -1,5 +1,6 @@
 import * as React from "react"
 import ButtonTitle from './ButtonTitle'
+import { EditCard } from "./EditCard"
 
 interface Props {
     name?: string,
@@ -20,7 +21,7 @@ const BoxMobile: React.FC<Props> = ({ name, img, title, status, timeObj, search 
                 <img
                     src={img}
                     alt="company logo"
-                    className='absolute top-[-4.5rem] z-[99] w-[80px]' />
+                    className='absolute top-[-4.5rem] w-[80px]' />
                 <div className=" grid gap-3 pt-4">
                     <div className="flex flex-wrap  ">
                         <h4 className="mr-4 capitalize text-[#5da4a2] font-bold">{name}</h4>
@@ -44,6 +45,7 @@ const BoxMobile: React.FC<Props> = ({ name, img, title, status, timeObj, search 
                 </div>
             </div>
             <div className='w-full h-[.05rem] bg-[#5da4a2] rounded-full' />
+            <EditCard />
         </div>
     )
 }
