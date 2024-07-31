@@ -1,21 +1,20 @@
-// SelectCard.tsx
 import React, { useContext } from 'react';
+"use client"
+import { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu";
+
 import { Button } from "@/components/ui/button";
 import {
-    Card,
-    CardContent,
-    CardFooter,
-} from "@/components/ui/card";
-import {
-    Select,
-    SelectContent,
-    SelectGroup,
-    SelectItem,
-    SelectLabel,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
+    DropdownMenu,
+    DropdownMenuCheckboxItem,
+    DropdownMenuContent,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
+
 import { InputContext } from "./SearchInput";
+import { Card, CardContent } from './ui/card';
 
 interface Item {
     id: string;
@@ -36,46 +35,52 @@ const SelectCard: React.FC<Props> = ({ titles }) => {
     const { selectCard, setSelectCard } = context;
 
     // Handle the selection change
-    const handleSelectChange = (value: string) => {
-        const selectedItem = titles.find(item => item.id === value);
-        if (selectedItem) {
-            setSelectCard(prev => {
-                // Prevent adding duplicate items
-                if (prev.some(item => item.id === selectedItem.id)) {
-                    return prev;
+    const handleSelectChange = (id: string) => {
+        setSelectCard(prev => {
+            // Check if the item is already selected
+            const isSelected = prev.some(item => item.id === id);
+            if (isSelected) {
+                // Remove the item if it's already selected
+                return prev.filter(item => item.id !== id);
+            } else {
+                // Add the item if it's not selected
+                const selectedItem = titles.find(item => item.id === id);
+                if (selectedItem) {
+                    return [...prev, selectedItem];
                 }
-                return [...prev, selectedItem];
-            });
-        }
+                return prev;
+            }
+        });
     };
+
 
     return (
         <Card className="flex justify-between items-center md:flex-row flex-col">
             <CardContent className="w-full">
-                <form>
+                {true && <form>
                     <div className="grid w-full items-center gap-4">
                         <div className="flex flex-col space-y-1.5 pt-5">
-                            <Select onValueChange={handleSelectChange}>
-                                <SelectTrigger className="md:w-[180px] w-full capitalize">
-                                    <SelectValue placeholder="Select a Title" />
-                                </SelectTrigger>
-                                <SelectContent className='relative z-[99] '>
-                                    <SelectGroup>
-                                        <SelectLabel>Titles</SelectLabel>
-                                        {titles.map((item, index) => (
-                                            <SelectItem
-                                                key={index}
-                                                value={item.id}
-                                            >
-                                                {item.name}
-                                            </SelectItem>
-                                        ))}
-                                    </SelectGroup>
-                                </SelectContent>
-                            </Select>
+                            <DropdownMenu>
+                                <DropdownMenuTrigger asChild>
+                                    <Button variant="outline">Select A Title</Button>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent className="w-56">
+                                    <DropdownMenuLabel>Appearance</DropdownMenuLabel>
+                                    <DropdownMenuSeparator />
+                                    {titles.map(title => (
+                                        <DropdownMenuCheckboxItem
+                                            key={title.id}
+                                            checked={selectCard.some(item => item.id === title.id)}
+                                            onCheckedChange={() => handleSelectChange(title.id)}
+                                        >
+                                            {title.name}
+                                        </DropdownMenuCheckboxItem>
+                                    ))}
+                                </DropdownMenuContent>
+                            </DropdownMenu>
                         </div>
                     </div>
-                </form>
+                </form>}
             </CardContent>
         </Card>
     );

@@ -11,13 +11,10 @@ interface Props {
 const SearchTitle: React.FC<Props> = ({ children, }) => {
     const { selectCard, setSelectCard } = React.useContext(InputContext)
 
-    console.log(selectCard)
 
     const handleRemove = (itemId: string) => {
-        // Remove the item with the given id from selectCard
         setSelectCard(prev => prev.filter(item => item.id !== itemId));
-    };
-
+    }
 
     return (
         <Card className={` ${children != "" ? "h-full cursor-pointer" : "h-auto"} flex flex-1 px-6 justify-start w-full  gap-6 overflow-hidden py-6 flex-wrap items-center`}>
@@ -29,7 +26,7 @@ const SearchTitle: React.FC<Props> = ({ children, }) => {
                     {children[index].name}
                     <IoCloseSharp
                         onClick={() => handleRemove(children[index].id)}
-                        className="ml-2 cursor-pointer text-4xl h-[40px] bg-[#5da4a2] text-white flex " />
+                        className="ml-2 cursor-pointer text-4xl h-[40px] bg-[#5da4a2] hover:bg-[#4c8886] text-white flex " />
                 </Badge>
             </div>))}
             <span
