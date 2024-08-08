@@ -10,19 +10,19 @@ import {
 } from "@/components/ui/select"
 import data from "../constants/data.json"
 
-export const PositionCard = () => {
+export const ContactCard = () => {
     return (
         <Select>
             <SelectTrigger className="flex  w-full col-span-3">
-                <SelectValue placeholder="Select a position" />
+                <SelectValue placeholder="Select a contact" />
             </SelectTrigger>
             <SelectContent >
                 <SelectGroup>
-                    <SelectLabel>Position</SelectLabel>
-                    {Array.from(new Set(data.map(item => item.position))) // Create unique set of locations
-                        .map((pos, index) => (
-                            <SelectItem key={index} value={pos}>
-                                {pos}
+                    <SelectLabel>Contact</SelectLabel>
+                    {Array.from(new Set(data.map(item => item.contract))) // Create unique set of locations
+                        .map((contact, index) => (
+                            <SelectItem key={index} value={contact}>
+                                {contact}
                             </SelectItem>
                         ))}
                 </SelectGroup>

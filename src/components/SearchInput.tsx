@@ -33,7 +33,6 @@ const SearchInput: React.FC = () => {
     return (
         <InputContext.Provider value={{ selectCard, setSelectCard }}>
             <div className="flex md:flex-row-reverse flex-col-reverse gap-4 justify-between relative top-[-5rem]">
-
                 <SelectCard titles={titlesObj} />
                 <SearchTitle>{selectCard}</SearchTitle>
             </div>
